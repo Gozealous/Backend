@@ -17,7 +17,8 @@ workflows:
 jobs:
   build:
     description: Push Docker Image
-    executor: heroku/default
+    docker:
+      - image: cimg/base:2021.07
     steps:
       - setup_remote_docker
       - checkout
