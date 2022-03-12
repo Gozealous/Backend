@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run: docker build .
       - heroku/install
-      - run: docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
+      - run: heroku container:login
       - heroku/push-docker-image:
           app-name: gozealous
           process-types: web
