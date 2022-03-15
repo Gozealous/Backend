@@ -8,7 +8,7 @@ RUN pwd
 
 RUN ls
 
-COPY **/* ./
+COPY -r **/*.go ./
 
 RUN go mod download
 
