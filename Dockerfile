@@ -4,11 +4,7 @@ WORKDIR /app
 COPY go.mod ./
 COPY go.sum ./
 
-RUN pwd
-
-RUN ls
-
-COPY -r **/*.go ./
+COPY . ./
 
 RUN go mod download
 
