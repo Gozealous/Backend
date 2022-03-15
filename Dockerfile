@@ -1,18 +1,18 @@
 FROM golang:1.17-alpine
-# WORKDIR /app
+WORKDIR /app
 
-# COPY go.mod ./
-# COPY go.sum ./
+COPY go.mod ./
+COPY go.sum ./
 
 RUN pwd
 
 RUN ls
 
-COPY * ./
+COPY **/* ./
 
 RUN go mod download
 
-RUN ls
+RUN ls -R
 
 RUN go build -o /gozealous
 
