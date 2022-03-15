@@ -1,4 +1,4 @@
-module gozealous/backend
+module gozealous
 
 go 1.17
 
