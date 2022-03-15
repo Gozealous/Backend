@@ -6,7 +6,9 @@ COPY go.sum ./
 
 RUN go mod download
 
-COPY -R *.go ./
+COPY **/*.go ./
+
+RUN ls
 
 RUN go build -o /gozealous
 
