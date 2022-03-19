@@ -11,7 +11,7 @@ workflows:
   release-workflow:
     jobs:
       - test
-      - deploy
+      - deploy:
           requires:
             - test
 
