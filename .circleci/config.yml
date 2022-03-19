@@ -32,6 +32,9 @@ jobs:
       - run:
           name: Run tests
           command: gotestsum --junitfile unit-tests.xml
+      - run: |
+          pwd
+          ls
       - store_test_results:
           path: /tmp/test-results
   deploy:
