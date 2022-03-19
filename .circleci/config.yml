@@ -31,7 +31,7 @@ jobs:
       #     command: go test -v ./...
       - run:
           name: Run tests
-          command: gotestsum --junitfile test/test-result.xml
+          command: gotestsum --junitfile ./test/test-result.xml
       - run: |
           pwd
           ls
