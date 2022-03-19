@@ -10,13 +10,25 @@ orbs:
 workflows:
   release-workflow:
     jobs:
-      - build
+      - test
+      - deploy
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
-    description: Push Docker Image
+  test:
+    docker:
+      - image: circleci/golang:1.9
+    steps:
+      - checkout
+      - run: 
+          name: Install Dependencies
+          command: go get ./..
+      - run:
+          name: Run tests
+          command: go test -v ./.. 
+  deploy:
+    description: Build and Deploy Docker Image
     docker:
       - image: cimg/base:2021.07
     steps:
