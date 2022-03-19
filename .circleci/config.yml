@@ -26,17 +26,11 @@ jobs:
       - run:
           name: Install Dependencies
           command: go mod download
-      # - run:
-      #     name: Run tests
-      #     command: go test -v ./...
       - run:
           name: Run tests
-          command: gotestsum --junitfile ./test/test-result.xml
-      - run: |
-          pwd
-          ls
+          command: gotestsum --junitfile test-result.xml
       - store_test_results:
-          path: /test
+          path: $CIRCLE_WORKING_DIRECTORY
   deploy:
     description: Build and Deploy Docker Image
     docker:
