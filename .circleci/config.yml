@@ -23,12 +23,14 @@ jobs:
       - image: circleci/golang:1.17
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install Dependencies
           command: go mod download
       - run:
           name: Run tests
-          command: go test -v ./... 
+          command: go test -v ./...
+      - store_test_results:
+          path: test-results
   deploy:
     description: Build and Deploy Docker Image
     docker:
