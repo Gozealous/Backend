@@ -1,7 +1,7 @@
 package environment
 
 func ServerPort() (string, error) {
-	return getValue("SERVER_PORT")
+	return getValue("PORT")
 }
 
 func DatabaseUri() (string, error) {
