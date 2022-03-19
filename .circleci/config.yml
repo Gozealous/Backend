@@ -31,12 +31,12 @@ jobs:
       #     command: go test -v ./...
       - run:
           name: Run tests
-          command: gotestsum --junitfile test-result.xml
+          command: gotestsum --junitfile test/test-result.xml
       - run: |
           pwd
           ls
       - store_test_results:
-          path: /
+          path: /test
   deploy:
     description: Build and Deploy Docker Image
     docker:
