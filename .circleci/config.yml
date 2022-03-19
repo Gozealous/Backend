@@ -11,9 +11,9 @@ workflows:
   release-workflow:
     jobs:
       - test
-      - deploy:
-          requires:
-            - test
+      # - deploy:
+      #     requires:
+      #       - test
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -26,11 +26,14 @@ jobs:
       - run:
           name: Install Dependencies
           command: go mod download
+      # - run:
+      #     name: Run tests
+      #     command: go test -v ./...
       - run:
           name: Run tests
-          command: go test -v ./...
+          command: gotestsum --junitfile unit-tests.xml
       - store_test_results:
-          path: test-results
+          path: /tmp/test-results
   deploy:
     description: Build and Deploy Docker Image
     docker:
