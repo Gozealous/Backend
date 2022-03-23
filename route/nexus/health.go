@@ -1,24 +1,22 @@
 package nexus
 
 import (
-	"net/http"
-
 	"gozealous/service/health"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func HandleHealthStatus() gin.HandlerFunc {
+func HealthStatus() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Header("Content-Type", "application/json")
+		response := health.Status()
+		c.JSON(http.StatusOK, response)
+	}
+}
 
-		result := health.Status()
-
-		response := map[string]string{
-			"status": "success",
-			"data":   result,
-		}
-
+func DatabaseStatus() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		response := health.Database()
 		c.JSON(http.StatusOK, response)
 	}
 }

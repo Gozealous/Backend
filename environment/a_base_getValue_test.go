@@ -1,7 +1,6 @@
 package environment
 
 import (
-	"gozealous/anomaly"
 	"gozealous/code"
 	"os"
 
@@ -32,11 +31,9 @@ var _ = Describe("Getting environment variable", func() {
 			Expect(value).To(BeEmpty(), "Value is %v.", value)
 		})
 
-		It("should have ServiceError", func() {
+		It("should have EnvironmentVariableNotFound status code", func() {
 			_, err := getValue(mockEnvironmentVariableKey)
-			serviceError, ok := err.(*anomaly.ServiceError)
-			Expect(ok).To(BeTrue())
-			Expect(serviceError.Code).To(Equal(code.EnvironmentVariableNotFound))
+			Expect(err.Code).To(Equal(code.EnvironmentVariableNotFound))
 		})
 	})
 })
