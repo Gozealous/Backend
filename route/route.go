@@ -9,7 +9,7 @@ import (
 func Configure(engine *gin.Engine) {
 
 	engine.GET("/", func(ctx *gin.Context) {
-		ctx.String(200, "Welcome to ZenRailz")
+		ctx.String(200, "Welcome to GoZealous")
 	})
 
 	health := engine.Group("/health")

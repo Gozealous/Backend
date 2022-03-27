@@ -9,7 +9,7 @@ import (
 )
 
 var _ = Describe("Getting environment variable", func() {
-	Context("when value is set", func() {
+	When("value is set", func() {
 		AfterEach(func() {
 			os.Unsetenv(mockEnvironmentVariableKey)
 		})
@@ -21,9 +21,12 @@ var _ = Describe("Getting environment variable", func() {
 		})
 	})
 
-	Context("when value is not set", func() {
+	When("value is not set", func() {
 		BeforeEach(func() {
 			os.Unsetenv(mockEnvironmentVariableKey)
+			DeferCleanup(func() {
+				os.Unsetenv(mockEnvironmentVariableKey)
+			})
 		})
 
 		It("should not have value", func() {
