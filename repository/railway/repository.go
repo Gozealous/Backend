@@ -1,23 +1,28 @@
-package database
+package railway
 
 import (
 	"database/sql"
 	"gozealous/anomaly"
 	"gozealous/code"
+	"gozealous/repository/common"
 )
 
-type Station struct {
-	Name   string
-	Code   string
-	Number int
+func NewRepository(db *sql.DB) *Repository {
+	return &Repository{
+		database: db,
+	}
 }
 
-func GetStations(db *sql.DB) ([]Station, *anomaly.ServiceError) {
+type Repository struct {
+	database *sql.DB
+}
+
+func (r *Repository) Stations() ([]Station, *anomaly.ServiceError) {
 	stations := []Station{}
 
-	rows, queryErr := db.Query("select name, code, number from station order by name, code, number")
+	rows, queryErr := r.database.Query("select name, code, number from station order by name, code, number")
 	if queryErr != nil {
-		err := parseError(code.DatabaseQueryFailure, "Unable to get stations.", queryErr)
+		err := common.ParseError(code.DatabaseQueryFailure, "Unable to get stations.", queryErr)
 		return stations, err.Trace()
 	}
 	defer rows.Close()
@@ -30,7 +35,7 @@ func GetStations(db *sql.DB) ([]Station, *anomaly.ServiceError) {
 		)
 
 		if scanErr := rows.Scan(&stationName, &stationCode, &stationNumber); scanErr != nil {
-			err := parseError(code.DatabaseRowScanFailure, "Unable to read a station.", scanErr)
+			err := common.ParseError(code.DatabaseRowScanFailure, "Unable to read a station.", scanErr)
 			return stations, err.Trace()
 		}
 
@@ -44,7 +49,7 @@ func GetStations(db *sql.DB) ([]Station, *anomaly.ServiceError) {
 	}
 
 	if rowErr := rows.Err(); rowErr != nil {
-		err := parseError(code.DatabaseRowError, "Database Row Operation encountered an error.", rowErr)
+		err := common.ParseError(code.DatabaseRowError, "Database Row Operation encountered an error.", rowErr)
 		return stations, err.Trace()
 	}
 
