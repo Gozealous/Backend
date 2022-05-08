@@ -28,7 +28,7 @@ jobs:
           command: go mod download
       - run:
           name: Run tests
-          command: gotestsum --junitfile test-result.xml $(go list ./... | circleci tests split)
+          command: gotestsum --junitfile test-result.xml $(go list ./... | circleci tests split --split-by=timings)
       - store_test_results:
           path: ./
   deploy:
