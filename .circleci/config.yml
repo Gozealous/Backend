@@ -20,6 +20,7 @@ jobs:
   test:
     docker:
       - image: circleci/golang:1.17
+    parallelism: 4
     steps:
       - checkout
       - run:

@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    ".circleci": true,
+    ".circleci": false,
     ".dockerignore": true,
     ".gitignore": true,
     "Dockerfile": true,
