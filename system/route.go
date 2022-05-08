@@ -8,7 +8,7 @@ import (
 
 func ConfigureRoute(engine *gin.Engine, nexus *nexus.Store) {
 	engine.GET("/", func(ctx *gin.Context) {
-		ctx.String(200, "Welcome to GoZealous")
+		ctx.String(200, "Welcome to gozealous")
 	})
 
 	health := engine.Group("/health")
@@ -19,4 +19,6 @@ func ConfigureRoute(engine *gin.Engine, nexus *nexus.Store) {
 
 	railway := engine.Group("/railway")
 	railway.GET("/stations", nexus.RailwayStations())
+	railway.GET("/lines", nexus.RailwayLines())
+	railway.GET("/journey", nexus.RailwayJourney())
 }

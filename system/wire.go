@@ -8,6 +8,7 @@ import (
 	"gozealous/log"
 	"gozealous/nexus"
 	"gozealous/repository"
+	configRepo "gozealous/repository/configuration"
 	databaseRepo "gozealous/repository/database"
 	railwayRepo "gozealous/repository/railway"
 	"gozealous/service"
@@ -20,6 +21,11 @@ import (
 var databaseRepositorySet = wire.NewSet(
 	databaseRepo.NewRepository,
 	wire.Bind(new(repository.Database), new(*databaseRepo.Repository)),
+)
+
+var configurationRepositorySet = wire.NewSet(
+	configRepo.NewRepository,
+	wire.Bind(new(repository.Configuration), new(*configRepo.Repository)),
 )
 
 var railwayRepositorySet = wire.NewSet(
@@ -41,6 +47,7 @@ func InitialiseNexus(logger log.Logger, db *sql.DB) *nexus.Store {
 	panic(
 		wire.Build(
 			databaseRepositorySet,
+			configurationRepositorySet,
 			railwayRepositorySet,
 
 			nativeServiceSet,

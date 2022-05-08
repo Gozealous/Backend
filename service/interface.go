@@ -1,8 +1,9 @@
 package service
 
 import (
-	"gozealous/anomaly"
+	"gozealous/errorr"
 	"gozealous/service/native"
+	"gozealous/service/railway"
 )
 
 type Native interface {
@@ -11,5 +12,7 @@ type Native interface {
 }
 
 type Railway interface {
-	Stations() (interface{}, *anomaly.ServiceError)
+	Stations() (interface{}, errorr.Entity)
+	Lines() ([]railway.Line, errorr.Entity)
+	Journey(originStationName string, destinationStationName string) ([][]railway.PathPoint, errorr.Entity)
 }

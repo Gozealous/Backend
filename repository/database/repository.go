@@ -2,8 +2,8 @@ package database
 
 import (
 	"database/sql"
-	"gozealous/anomaly"
 	"gozealous/code"
+	"gozealous/errorr"
 	"gozealous/repository/common"
 )
 
@@ -13,11 +13,7 @@ func NewRepository(db *sql.DB) *Repository {
 	}
 }
 
-type Repository struct {
-	database *sql.DB
-}
-
-func (d *Repository) Ping() *anomaly.ServiceError {
+func (d *Repository) Ping() errorr.Entity {
 	if pingErr := d.database.Ping(); pingErr != nil {
 		err := common.ParseError(code.DatabasePingFailure, "Unable to reach database. Database did not respond.", pingErr)
 		return err.Trace()

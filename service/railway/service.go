@@ -5,14 +5,10 @@ import (
 	"gozealous/repository"
 )
 
-type Service struct {
-	logger      log.Logger
-	railwayRepo repository.Railway
-}
-
-func NewService(logger log.Logger, railwayRepository repository.Railway) *Service {
+func NewService(logger log.Logger, configurationRepository repository.Configuration, railwayRepository repository.Railway) *Service {
 	return &Service{
 		logger:      logger,
+		configRepo:  configurationRepository,
 		railwayRepo: railwayRepository,
 	}
 }

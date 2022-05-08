@@ -24,8 +24,8 @@ func run(logger log.Logger) {
 	}
 	defer db.Close()
 
-	nexus := InitialiseNexus(logger, db)
 	engine := gin.Default()
+	nexus := InitialiseNexus(logger, db)
 
 	ConfigureRoute(engine, nexus)
 

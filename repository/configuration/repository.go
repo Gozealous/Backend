@@ -1,4 +1,4 @@
-package railway
+package configuration
 
 import (
 	"database/sql"
